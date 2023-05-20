@@ -19,7 +19,7 @@ export class CustomersService {
             throw new NotFoundException('groupId is invalid');
         }
         const email = customerDto.email
-        const customer = this.repo.findOneBy({email})
+        const customer = await this.repo.findOneBy({email})
         if (customer) throw new BadRequestException('customer email already existed')
         // Hash the password together
         const hashedPsw = await this.hashPassword(customerDto.password);
